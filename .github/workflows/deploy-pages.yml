@@ -28,11 +28,6 @@ jobs:
           cache: npm
       - name: Install deps
         run: npm ci
-      - name: Inject API URL meta (optional)
-        if: ${{ secrets.FRONTEND_API_URL != '' }}
-        env:
-          FRONTEND_API_URL: ${{ secrets.FRONTEND_API_URL }}
-        run: sed -i "s#https://YOUR-WORKER-URL/api#${FRONTEND_API_URL}#" public/index.html
       - name: Build
         run: npm run build
       - name: Upload artifact
