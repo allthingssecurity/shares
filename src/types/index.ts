@@ -82,6 +82,7 @@ export interface TaxConfig {
 }
 
 export interface LedgerData {
+  sessionId?: string;
   transactions: Transaction[];
   closingBalances: ClosingBalance[];
   summary: Summary;

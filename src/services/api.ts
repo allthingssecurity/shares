@@ -52,11 +52,19 @@ export const updateTaxConfig = async (config: Partial<TaxConfig>): Promise<{ mes
 };
 
 export const exportNextYear = (): string => {
-  return `${API_BASE_URL}/export/next-year`;
+  const sidLS = typeof localStorage !== 'undefined' ? localStorage.getItem('sid') : null;
+  const sidCookie = typeof document !== 'undefined' ? document.cookie.split('; ').find(c => c.startsWith('sid='))?.split('=')[1] : undefined;
+  const sid = sidLS || sidCookie || '';
+  const qs = sid ? `?sid=${encodeURIComponent(sid)}` : '';
+  return `${API_BASE_URL}/export/next-year${qs}`;
 };
 
 export const exportCurrentReport = (): string => {
-  return `${API_BASE_URL}/export/current`;
+  const sidLS = typeof localStorage !== 'undefined' ? localStorage.getItem('sid') : null;
+  const sidCookie = typeof document !== 'undefined' ? document.cookie.split('; ').find(c => c.startsWith('sid='))?.split('=')[1] : undefined;
+  const sid = sidLS || sidCookie || '';
+  const qs = sid ? `?sid=${encodeURIComponent(sid)}` : '';
+  return `${API_BASE_URL}/export/current${qs}`;
 };
 
 export default api;

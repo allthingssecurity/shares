@@ -61,6 +61,9 @@ const App: React.FC = () => {
     setError(null);
     try {
       const result = await uploadFile(file);
+      if (result && (result as any).sessionId) {
+        try { localStorage.setItem('sid', (result as any).sessionId as string); } catch(e) {}
+      }
       setLedgerData(result);
       if (result.taxConfig) {
         setTaxConfig(result.taxConfig);
