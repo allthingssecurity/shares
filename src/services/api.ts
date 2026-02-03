@@ -20,12 +20,7 @@ export const healthCheck = async (): Promise<{ status: string; timestamp: string
 export const uploadFile = async (file: File): Promise<LedgerData> => {
   const formData = new FormData();
   formData.append('file', file);
-  
-  const response = await api.post('/upload', formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-  });
+  const response = await api.post('/upload', formData);
   return response.data;
 };
 
