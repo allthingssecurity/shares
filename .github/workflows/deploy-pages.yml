@@ -26,6 +26,9 @@ jobs:
           cache-dependency-path: package-lock.json
       - name: Install deps
         run: npm ci
+      - name: Inject API URL meta (optional)
+        if: ${{ secrets.FRONTEND_API_URL }}
+        run: sed -i "s#https://YOUR-WORKER-URL/api#${{ secrets.FRONTEND_API_URL }}#" public/index.html
       - name: Build
         run: npm run build
       - name: Upload artifact
